@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import LoginPage from './views/login';
+import SignupPage from './views/signup';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         {/* <Route
             path="/dashboard"
             element={

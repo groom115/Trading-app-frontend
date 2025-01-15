@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import { login } from "../api/auth";
+import { signup } from "../api/auth";
 import { Link } from "react-router-dom";
 
-export default function LoginPage() {
+export default function SignupPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -17,20 +17,21 @@ export default function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await login(email, password);
-            console.log(response)
-            toast.success('Login successful!')
-        } catch (error) {
-            toast.error(error.message || "Something went wrong, please try again.");
-        }
 
-    };
+        try {
+            const response = await signup(email, password);
+            console.log(response)
+            toast.success('Signup successful!')
+        } catch (error) {
+            console.log(error)
+            toast.error(error.detail || "Something went wrong, please try again.");
+        }
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-black">
             <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 shadow-lg rounded-lg">
-                <h2 className="text-2xl font-bold text-center text-white">Login</h2>
+                <h2 className="text-2xl font-bold text-center text-white">Create an account</h2>
 
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
@@ -71,20 +72,20 @@ export default function LoginPage() {
                         type="submit"
                         className="w-full px-4 py-2 text-white bg-black rounded-lg hover:bg-gray-600 focus:ring-2 focus:ring-gray-600 focus:outline-none"
                     >
-                        Log In
+                        Sign Up
                     </button>
                 </form>
                 <div className="text-sm text-center text-gray-400">
-                    Don't have an account?{" "}
+                    Already have an account?{" "}
                     <Link
-                        to="/signup"
+                        to="/login"
                         className="text-white hover:underline"
                     >
-                        Sign Up
+                        Login
                     </Link>
                 </div>
             </div>
-            <ToastContainer autoClose={4000} />
+            <ToastContainer autoClose={3000} />
         </div>
     );
 }
