@@ -1,30 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import LoginPage from './views/login';
 import SignupPage from './views/signup';
+import Homepage from './views/home';
+import store from './redux/store';
+import authSlice from './redux/slices/authSlice';
+import ProtectedRoute from './helpers/protectedRoute';
 
 function App() {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log(token)
+    if (token) {
+      store.dispatch(authSlice.actions.login(token));
+    }
+  }, []);
   return (
-    // <Provider >
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        {/* <Route
-            path="/dashboard"
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          {/* <Route path="/" element={<Homepage />} /> */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Homepage />
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<Navigate to="/dashboard" />} /> */}
-      </Routes>
-    </Router>
-    // </Provider>
+
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 

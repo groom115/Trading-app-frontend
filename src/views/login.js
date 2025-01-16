@@ -4,11 +4,16 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { login } from "../api/auth";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import authSlice from '../redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const togglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
@@ -19,8 +24,16 @@ export default function LoginPage() {
 
         try {
             const response = await login(email, password);
+            const token = response.token
+            localStorage.setItem('token', token);
             console.log(response)
-            toast.success('Login successful!')
+            toast.success('Login successful!', {
+                onClose: () => {
+                    dispatch(dispatch(authSlice.actions.login(token)))
+                    navigate('/')
+                },
+            });
+
         } catch (error) {
             toast.error(error.message || "Something went wrong, please try again.");
         }
