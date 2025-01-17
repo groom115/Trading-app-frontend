@@ -24,7 +24,7 @@ export default function SignupPage() {
 
         try {
             const response = await signup(email, password);
-            const token = response.token
+            const token = response.access_token
             localStorage.setItem('token', token);
             console.log(response)
             toast.success('Signup successful!', {

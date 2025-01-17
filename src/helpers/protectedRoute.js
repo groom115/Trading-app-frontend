@@ -1,12 +1,22 @@
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, path }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    return isAuthenticated ? children : <Navigate to="/login" />;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/login');
+        } else {
+            navigate(path);
+        }
+    }, [isAuthenticated, navigate, path]);
+
+    return isAuthenticated ? children : null;
 };
 
 export default ProtectedRoute;
