@@ -1,7 +1,9 @@
 import React from "react";
 import Header from "../components/header";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
+    const navigate = useNavigate()
     return (
         <div className="bg-black min-h-screen text-gray-100">
             <Header />
@@ -10,9 +12,9 @@ const Homepage = () => {
                 <div className="flex gap-4">
                     <button
                         className="bg-gray-700 hover:bg-gray-600 text-gray-100 font-medium py-2 px-5 rounded transition"
-                        onClick={() => alert("Navigating to View Users...")}
+                        onClick={() => navigate('/table')}
                     >
-                        View Users
+                        View Table
                     </button>
                     <button
                         className="bg-gray-700 hover:bg-gray-600 text-gray-100 font-medium py-2 px-5 rounded transition"

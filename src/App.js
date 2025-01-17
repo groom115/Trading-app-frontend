@@ -9,6 +9,7 @@ import Homepage from './views/home';
 import store from './redux/store';
 import authSlice from './redux/slices/authSlice';
 import ProtectedRoute from './helpers/protectedRoute';
+import UserTable from './views/userTable';
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Homepage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/table"
+            element={
+              <ProtectedRoute>
+                <UserTable />
               </ProtectedRoute>
             }
           />
