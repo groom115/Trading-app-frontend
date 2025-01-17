@@ -3,12 +3,16 @@ import { ToastContainer, toast } from "react-toastify";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { signup } from "../api/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import authSlice from '../redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 export default function SignupPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const togglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
@@ -20,8 +24,15 @@ export default function SignupPage() {
 
         try {
             const response = await signup(email, password);
+            const token = response.token
+            localStorage.setItem('token', token);
             console.log(response)
-            toast.success('Signup successful!')
+            toast.success('Signup successful!', {
+                onClose: () => {
+                    dispatch(authSlice.actions.signup(token))
+                    navigate('/')
+                },
+            });
         } catch (error) {
             console.log(error)
             toast.error(error.detail || "Something went wrong, please try again.");
