@@ -24,12 +24,12 @@ export default function LoginPage() {
 
         try {
             const response = await login(email, password);
-            const token = response.token
+            const token = response.access_token
             localStorage.setItem('token', token);
             console.log(response)
             toast.success('Login successful!', {
                 onClose: () => {
-                    dispatch(dispatch(authSlice.actions.login(token)))
+                    dispatch(authSlice.actions.login(token))
                     navigate('/')
                 },
             });

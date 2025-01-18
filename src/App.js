@@ -14,7 +14,8 @@ import UserTable from './views/userTable';
 function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token)
+    console.log('app', localStorage, token)
+
     if (token) {
       store.dispatch(authSlice.actions.login(token));
     }
@@ -29,7 +30,7 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute path="/">
                 <Homepage />
               </ProtectedRoute>
             }
@@ -37,7 +38,7 @@ function App() {
           <Route
             path="/table"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute path="/table">
                 <UserTable />
               </ProtectedRoute>
             }
