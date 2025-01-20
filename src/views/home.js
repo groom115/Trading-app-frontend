@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
     const navigate = useNavigate()
+    console.log(localStorage)
     return (
         <div className="bg-black min-h-screen text-gray-100">
             <Header />
