@@ -11,14 +11,16 @@ export const addRow = async (row) => {
 
 
 export const updateRow = async (row_id, row) => {
-    return await router.put("table", { row_id, row });
+    return await router.put(`table?row_id=${row_id}`, row);
 };
 
 
 export const deleteRow = async (row_id) => {
-    return await router.delete("table", { row_id });
+    console.log(row_id)
+    return await router.delete(`table?row_id=${row_id}`);
 };
 
 export const restoreRows = async () => {
+    console.log('1111')
     return await router.get("table/restore");
 };
