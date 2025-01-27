@@ -10,6 +10,7 @@ import store from './redux/store';
 import authSlice from './redux/slices/authSlice';
 import ProtectedRoute from './helpers/protectedRoute';
 import UserTable from './views/userTable';
+import TradingData from './views/chart';
 
 function App() {
   useEffect(() => {
@@ -40,6 +41,14 @@ function App() {
             element={
               <ProtectedRoute path="/table">
                 <UserTable />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trading"
+            element={
+              <ProtectedRoute path="/trading">
+                <TradingData />
               </ProtectedRoute>
             }
           />
