@@ -19,7 +19,7 @@ const Homepage = () => {
                     </button>
                     <button
                         className="bg-gray-700 hover:bg-gray-600 text-gray-100 font-medium py-2 px-5 rounded transition"
-                        onClick={() => alert("Navigating to Trading Data...")}
+                        onClick={() => navigate('/trading')}
                     >
                         Trading Data
                     </button>
