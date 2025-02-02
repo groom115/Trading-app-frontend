@@ -11,7 +11,6 @@
 
 Follow these simple steps to get the application up and running on your local machine:
 
-1. **Clone the Repository**
 
    ```bash
    git clone https://github.com/groom115/Trading-app-frontend.git
