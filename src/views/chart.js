@@ -10,7 +10,7 @@ import {
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
-import { getRandomNumbers } from "../api/random_number";
+import { getRandomNumbers } from "../api/random-number";
 import Header from "../components/header";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, TimeScale, Tooltip);
@@ -44,10 +44,12 @@ const TradingData = () => {
 
 
     useEffect(() => {
+
         fetchData();
-        // const interval = setInterval(fetchData, 1000); // Poll every 1 second
-        // return () => clearInterval(interval);
+        const interval = setInterval(fetchData, 60000);
+        return () => clearInterval(interval);
     }, []);
+
 
 
     useEffect(() => {
@@ -123,19 +125,14 @@ const TradingData = () => {
 
         let unit;
         if (timeDiff <= 60000) {
-            // 1 minute
             unit = "second";
         } else if (timeDiff <= 3600000) {
-            // 1 hour
             unit = "minute";
         } else if (timeDiff <= 86400000) {
-            // 1 day
             unit = "hour";
         } else if (timeDiff <= 604800000) {
-            // 1 week
             unit = "day";
         } else if (timeDiff <= 2592000000) {
-            // ~1 month
             unit = "month";
         } else {
             unit = "year";
@@ -167,7 +164,6 @@ const TradingData = () => {
         <div className="min-h-screen bg-gray-900 text-gray-300">
             <Header showBackButton />
             <main className="p-6">
-                {/* Interactive Plot */}
                 <div className="bg-black shadow-lg rounded-lg p-6 mb-12">
                     <h2 className="text-2xl font-semibold mb-4 text-white">Interactive Plot</h2>
                     {loading ? (
@@ -178,15 +174,12 @@ const TradingData = () => {
                         </div>
                     )}
                 </div>
-
-                {/* Dynamic Table */}
                 <div className="bg-black shadow-lg rounded-lg p-6 mt-8">
                     <h2 className="text-2xl font-semibold mb-4 text-white">Dynamic Table</h2>
                     {loading ? (
                         <p className="text-gray-400">Loading...</p>
                     ) : (
                         <>
-                            {/* Sorting Checkbox */}
                             <div className="flex items-center mb-4">
                                 <label className="flex items-center space-x-2">
                                     <input
@@ -198,8 +191,6 @@ const TradingData = () => {
                                     <span className="text-gray-300">Sort numbers</span>
                                 </label>
                             </div>
-
-                            {/* Table */}
                             <div className="overflow-x-auto">
                                 <table className="min-w-full bg-gray-700 border border-gray-600 rounded-lg">
                                     <thead>
@@ -226,8 +217,6 @@ const TradingData = () => {
                                     </tbody>
                                 </table>
                             </div>
-
-                            {/* Pagination Controls */}
                             <div className="flex justify-between items-center mt-4">
                                 <button
                                     onClick={handlePreviousPage}
