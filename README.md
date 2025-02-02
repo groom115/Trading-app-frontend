@@ -1,20 +1,4 @@
-# Project Title
-
-A brief description of your project goes here.
-
-## Table of Contents
-
-- [Project Title](#project-title)
-- [Description](#description)
-- [Features](#features)
-- [Running Locally](#running-locally)
-- [Live Deployment](#live-deployment)
-- [Additional Information](#additional-information)
-- [Troubleshooting](#troubleshooting)
-
-## Description
-
-This project is a [brief description of what your project does]. It is built using [technologies used] and is designed to provide [main functionalities]. The application features an interactive user interface, real-time updates, and a clean, responsive design.
+# [Trading-app-frontend](https://trading-app-frontend-zofz.vercel.app/)
 
 ## Features
 
@@ -30,8 +14,11 @@ Follow these simple steps to get the application up and running on your local ma
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/your-repository.git
-   cd your-repository
-```
+   git clone https://github.com/groom115/Trading-app-frontend.git
+   cd trading-app-frontend
+
+   npm install
+   npm start
+
 
 
