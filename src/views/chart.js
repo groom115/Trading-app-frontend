@@ -29,9 +29,14 @@ const TradingData = () => {
             const response = await getRandomNumbers();
             const random_number = response.random_numbers;
 
-            const sortedNumbers = random_number.sort(
+            const filteredNumbers = random_number.filter(
+                (item) => new Date(item.timestamp).getMonth() !== 0
+            );
+
+            const sortedNumbers = filteredNumbers.sort(
                 (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
             );
+
             const recentNumbers = sortedNumbers.slice(-200);
             const formattedData = recentNumbers.map((item) => ({
                 x: new Date(item.timestamp),
