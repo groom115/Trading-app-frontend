@@ -29,7 +29,11 @@ const TradingData = () => {
             const response = await getRandomNumbers();
             const random_number = response.random_numbers;
 
-            const formattedData = random_number.map((item) => ({
+            const sortedNumbers = random_number.sort(
+                (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+            );
+            const recentNumbers = sortedNumbers.slice(-200);
+            const formattedData = recentNumbers.map((item) => ({
                 x: new Date(item.timestamp),
                 y: item.number,
             }));
@@ -143,9 +147,11 @@ const TradingData = () => {
             scales: {
                 x: {
                     type: "time",
-                    time: { unit },
+                    time: { unit: 'minute' },
                     title: { display: true, text: "Timestamp" },
                     ticks: { color: "#D1D5DB" },
+                    // min: minTimestamp,
+                    // max: maxTimestamp,
                 },
                 y: {
                     title: { display: true, text: "Random Number" },
